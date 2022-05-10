@@ -1,0 +1,30 @@
+{
+  "name": "wetube",
+  "version": "1.0.0",
+  "description": "wetube clone practice using node.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilleLee/practice-wetube.git"
+  },
+  "author": {
+    "name": "Wille Lee",
+    "email": "1992season@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WilleLee/practice-wetube/issues"
+  },
+  "homepage": "https://github.com/WilleLee/practice-wetube#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/node": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "nodemon": "^2.0.16"
+  }
+}
