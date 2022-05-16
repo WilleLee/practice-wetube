@@ -4,17 +4,16 @@ const PORT = 4000;
 
 const app = express();
 
-const handleHome = (req, res) => {
-  return res.send("<h1>love you</h1>");
-};
-const handleSignin = (req, res) => {
-  return res.send("You're signed in.");
+const handleHome = (req, res, next) => {
+  console.log("home");
+  return res.send("never mind");
 };
 
 app.get("/", handleHome);
-app.get("/signin", handleSignin);
+
+// the browser never goes anywhere, but receives files that construct pages.
 
 const handleListening = () =>
-  console.log(`🥺 Server listening to the port ${PORT}`);
+  console.log(`🥺 Server listening to the port http://localhost:${PORT}`);
 
 app.listen(PORT, handleListening);
