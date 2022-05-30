@@ -13,6 +13,7 @@ app.set("view engine", "pug");
 app.set("x-powered-by", false);
 app.set("views", process.cwd() + "/src/views");
 app.use(logger);
+app.use(express.urlencoded({ extended: true }));
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 app.use("/", globalRouter);
