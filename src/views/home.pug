@@ -9,7 +9,7 @@ block content
         li 
           a(href="/videos/upload") Upload Video
   
-  each info in videos 
-    +video(info)
+  each video in videos 
+    +video(video)
   else
     li sorry, nothing's found
