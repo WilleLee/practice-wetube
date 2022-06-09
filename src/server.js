@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
+import { localsMiddleware } from "./middlewares";
 /*routers*/
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
@@ -23,6 +24,7 @@ app.use(
   })
 );
 
+app.use(localsMiddleware);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 app.use("/", rootRouter);
