@@ -21,15 +21,17 @@ app.use(
   session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
-      maxAge: 20000,
+      maxAge: 600000,
     },
+    rolling: true,
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
 
 app.use(localsMiddleware);
+app.use("/uploads", express.static("uploads"));
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 app.use("/", rootRouter);

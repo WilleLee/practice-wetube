@@ -147,11 +147,11 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { username, nickname, email, location },
+    file,
   } = req;
-
   const currentUser = req.session.user;
   if (nickname !== currentUser.nickname) {
     const alreadyExist = await User.exists({ nickname });
@@ -165,6 +165,7 @@ export const postEdit = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
+      avatarUrl: file ? file.path : avatarUrl,
       username,
       nickname,
       email,
@@ -213,4 +214,13 @@ export const postChangePassword = async (req, res) => {
 };
 
 export const deleteUser = (req, res) => res.send("Delete User");
-export const see = (req, res) => res.send("See");
+export const see = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user)
+    return res.status(404).render("404", { pageTitle: "user not found" });
+  return res.render("users/profile", {
+    pageTitle: `${user.username}'s Profile`,
+    user,
+  });
+};
