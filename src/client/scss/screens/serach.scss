@@ -1,0 +1,15 @@
+.search__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  button {
+    all: unset;
+    position: absolute;
+    right: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    cursor: pointer;
+  }
+}
