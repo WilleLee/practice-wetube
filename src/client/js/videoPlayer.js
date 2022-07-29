@@ -5,9 +5,14 @@ const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("volume");
 const timeline = document.getElementById("timeline");
+const fullScreenBtn = document.getElementById("fullScreenBtn");
+const videoContainer = document.getElementById("videoContainer");
+const videoControls = document.getElementById("videoControls");
 
 let volumeValue = 0.5;
 video.volume = volumeValue;
+let controlsTimeout = null;
+let controlsMovementTimeout = null;
 
 const handlePlayBtn = () => {
   // if the video is being played, pause
@@ -80,9 +85,42 @@ const handleTimelineChange = (e) => {
   video.currentTime = value;
 };
 
+const handleFullScreenBtn = () => {
+  const fullscreen = document.fullscreenElement;
+  if (fullscreen) {
+    document.exitFullscreen();
+    fullScreenBtn.innerText = "Enter Full Screen";
+  } else {
+    videoContainer.requestFullscreen();
+    fullScreenBtn.innerText = "Exit Full Screen";
+  }
+};
+
+const hideControls = () => {
+  videoControls.classList.remove("showing");
+};
+const handleMouseMove = () => {
+  if (controlsTimeout) {
+    clearTimeout(controlsTimeout);
+    controlsTimeout = null;
+  }
+  if (controlsMovementTimeout) {
+    clearTimeout(controlsMovementTimeout);
+    controlsMovementTimeout = null;
+  }
+  videoControls.classList.add("showing");
+  controlsMovementTimeout = setTimeout(hideControls, 3000);
+};
+const handleMouseLeave = () => {
+  controlsTimeout = setTimeout(hideControls, 3000);
+};
+
 playBtn.addEventListener("click", handlePlayBtn);
 muteBtn.addEventListener("click", handleMuteBtn);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadedmetadata", handleLoadedMetaData);
 video.addEventListener("timeupdate", handleTimeUpdate);
+video.addEventListener("mousemove", handleMouseMove);
+video.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
+fullScreenBtn.addEventListener("click", handleFullScreenBtn);
