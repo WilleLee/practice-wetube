@@ -14,7 +14,7 @@ video.volume = volumeValue;
 let controlsTimeout = null;
 let controlsMovementTimeout = null;
 
-const handlePlayBtn = () => {
+const handlePlayVideo = () => {
   // if the video is being played, pause
   if (video.paused) {
     video.play();
@@ -24,6 +24,10 @@ const handlePlayBtn = () => {
   // else play it again
   playBtn.innerText = video.paused ? "Play" : "Pause";
 };
+const handlePlayBtn = () => {
+  handlePlayVideo();
+};
+
 const handleMute = () => {
   if (video.muted) {
     muteBtn.innerText = "Mute";
@@ -115,6 +119,11 @@ const handleMouseLeave = () => {
   controlsTimeout = setTimeout(hideControls, 3000);
 };
 
+const handleKeyDown = (e) => {
+  const { keyCode } = e;
+  if (keyCode === 32) handlePlayVideo();
+};
+
 playBtn.addEventListener("click", handlePlayBtn);
 muteBtn.addEventListener("click", handleMuteBtn);
 volumeRange.addEventListener("input", handleVolumeChange);
@@ -124,3 +133,4 @@ video.addEventListener("mousemove", handleMouseMove);
 video.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreenBtn);
+document.addEventListener("keydown", handleKeyDown);
