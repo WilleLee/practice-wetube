@@ -1,11 +1,14 @@
 const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
+const playIcon = playBtn.querySelector("i");
 const muteBtn = document.getElementById("mute");
+const muteIcon = muteBtn.querySelector("i");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("volume");
 const timeline = document.getElementById("timeline");
 const fullScreenBtn = document.getElementById("fullScreenBtn");
+const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
@@ -22,7 +25,8 @@ const handlePlayVideo = () => {
     video.pause();
   }
   // else play it again
-  playBtn.innerText = video.paused ? "Play" : "Pause";
+
+  playIcon.classList = video.paused ? "fa-solid fa-play" : "fa-solid fa-pause";
 };
 const handlePlayBtn = () => {
   handlePlayVideo();
@@ -30,13 +34,12 @@ const handlePlayBtn = () => {
 
 const handleMute = () => {
   if (video.muted) {
-    muteBtn.innerText = "Mute";
+    muteIcon.classList = "fa-solid fa-microphone-slash";
     video.muted = false;
   } else {
-    muteBtn.innerText = "Unmute";
+    muteIcon.classList = "fa-solid fa-microphone";
     video.muted = true;
   }
-  muteBtn.innerText = video.muted ? "Unmute" : "Mute";
 };
 const handleMuteBtn = () => {
   // if the video is muted
@@ -46,12 +49,19 @@ const handleMuteBtn = () => {
 };
 
 const handleVolumeChange = (e) => {
+  e.preventDefault();
   const {
     target: { value },
   } = e;
-  handleMute();
   volumeValue = value;
   video.volume = value;
+  if (!video.volume) {
+    muteIcon.classList = "fa-solid fa-microphone";
+    video.muted = true;
+  } else {
+    muteIcon.classList = "fa-solid fa-microphone-slash";
+    video.muted = false;
+  }
 };
 
 const formatTime = (sec) => {
@@ -89,14 +99,19 @@ const handleTimelineChange = (e) => {
   video.currentTime = value;
 };
 
-const handleFullScreenBtn = () => {
+const handleFullScreenBtn = (e) => {
+  e.target.blur();
+  //풀스크린 버튼 클릭 시 풀스크린 버튼에 포커스 되어 keydownspace event가 정상작동 하지 않음(풀스크린 해제/발동 + 비디오 재생/정지)
+  //blur method 통해 포커스 해제
   const fullscreen = document.fullscreenElement;
   if (fullscreen) {
     document.exitFullscreen();
-    fullScreenBtn.innerText = "Enter Full Screen";
+    fullScreenIcon.classList = "fa-solid fa-expand";
+    video.classList = "video__small-mode";
   } else {
     videoContainer.requestFullscreen();
-    fullScreenBtn.innerText = "Exit Full Screen";
+    fullScreenIcon.classList = "fa-solid fa-compress";
+    video.classList = "video__large-mode";
   }
 };
 
