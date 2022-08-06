@@ -16,6 +16,7 @@ let volumeValue = 0.5;
 video.volume = volumeValue;
 let controlsTimeout = null;
 let controlsMovementTimeout = null;
+let fullScreenElem = document.fullscreenElement || null;
 
 const handlePlayVideo = () => {
   // if the video is being played, pause
@@ -137,6 +138,11 @@ const handleMouseLeave = () => {
 const handleKeyDown = (e) => {
   const { keyCode } = e;
   if (keyCode === 32) handlePlayVideo();
+
+  const fullscreen = document.fullscreenElement;
+  if (fullscreen && keyCode === 27) {
+    console.log("hi");
+  }
 };
 
 playBtn.addEventListener("click", handlePlayBtn);
