@@ -7,6 +7,7 @@ import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
 
 const app = express();
 const logger = morgan("dev");
@@ -36,6 +37,7 @@ app.use("/static", express.static("assets"));
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 app.use("/", rootRouter);
+app.use("/api", apiRouter);
 
 // the browser never goes anywhere, but receives files that construct pages.
 
