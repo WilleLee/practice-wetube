@@ -117,6 +117,16 @@ const handleFullScreenBtn = (e) => {
     video.classList = "video__large-mode";
   }
 };
+const handleFullScreenChanage = () => {
+  const fullscreen = document.fullscreenElement;
+  if (fullscreen) {
+    fullScreenIcon.classList = "fa-solid fa-compress";
+    video.classList = "video__large-mode";
+  } else {
+    fullScreenIcon.classList = "fa-solid fa-expand";
+    video.classList = "video__small-mode";
+  }
+};
 
 const hideControls = () => {
   videoControls.classList.remove("showing");
@@ -148,11 +158,12 @@ const handleEnded = () => {
 const handleKeyDown = (e) => {
   const { keyCode } = e;
   if (keyCode === 32) handlePlayVideo();
-
+  /*
   const fullscreen = document.fullscreenElement;
   if (fullscreen && keyCode === 27) {
     console.log("hi");
   }
+  */
 };
 
 playBtn.addEventListener("click", handlePlayBtn);
@@ -165,4 +176,5 @@ video.addEventListener("mouseleave", handleMouseLeave);
 video.addEventListener("ended", handleEnded);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreenBtn);
+document.addEventListener("fullscreenchange", handleFullScreenChanage);
 document.addEventListener("keydown", handleKeyDown);
