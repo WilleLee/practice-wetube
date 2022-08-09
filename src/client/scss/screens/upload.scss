@@ -1,0 +1,21 @@
+.upload__recording {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  video {
+    margin-bottom: 10px;
+  }
+  button {
+    margin: 0 auto;
+    color: $red;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    background-color: $fontC;
+    border-radius: 5px;
+    border: none;
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}

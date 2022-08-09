@@ -1,7 +1,7 @@
 extends base
 
 block content 
-  div
+  div.upload__recording
     video#preview
     button#recordingBtn Start Recording
   if errorMsg
@@ -9,6 +9,8 @@ block content
   form(method="POST", enctype="multipart/form-data")
     label(for="video") Video File
     input(type="file", accept="video/*", id="video", name="video", required)
+    label(for="thumbnail") Thumbnail File
+    input(type="file", accept="image/*", id="thumbnail", name="thumbnail", required)
     input(name="title", placeholder="Title", required, type="text", maxlength=15)
     input(name="description", placeholder="Description", required, type="text", minlength=8)
     input(name="hashtags", placeholder="Hashtags, separated by commas.", required, type="text")
