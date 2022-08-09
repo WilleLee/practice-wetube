@@ -9,10 +9,20 @@ export const localsMiddleware = (req, res, next) => {
 };
 
 export const protectorMiddleware = (req, res, next) => {
-  req.session.loggedIn ? next() : res.redirect("/login");
+  if (req.session.loggedIn) {
+    next();
+  } else {
+    req.flash("error", "Log in, first.");
+    res.redirect("/login");
+  }
 };
 export const publicOnlyMiddleware = (req, res, next) => {
-  !req.session.loggedIn ? next() : res.redirect("/");
+  if (!req.session.loggedIn) {
+    next();
+  } else {
+    req.flash("error", "You are logged in, already.");
+    res.redirect("/");
+  }
 };
 
 export const uploadAvatar = multer({

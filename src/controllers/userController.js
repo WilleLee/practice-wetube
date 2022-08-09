@@ -30,6 +30,7 @@ export const postJoin = async (req, res) => {
       password,
       location,
     });
+    req.flash("info", "successfully created an account");
     return res.redirect("/login");
   } catch (error) {
     return res.status(400).render("join", {
@@ -61,6 +62,7 @@ export const postLogin = async (req, res) => {
   }
   req.session.loggedIn = true;
   req.session.user = user;
+  req.flash("info", "successfully logged in");
   return res.redirect("/");
 };
 
@@ -140,6 +142,7 @@ export const finishGithubLogin = async (req, res) => {
 };
 export const logout = (req, res) => {
   req.session.destroy();
+  req.flash("info", "Bye!");
   return res.redirect("/");
 };
 export const getEdit = (req, res) => {
@@ -180,7 +183,13 @@ export const postEdit = async (req, res) => {
 };
 
 export const getChangePassword = (req, res) => {
-  if (req.session.user.socialOnly === true) return res.redirect("/");
+  if (req.session.user.socialOnly === true) {
+    req.flash(
+      "error",
+      "can't change the password b/c you're logged in by gitHub"
+    );
+    return res.redirect("/");
+  }
   return res.render("change-password", { pageTitle: "Change Password" });
 };
 export const postChangePassword = async (req, res) => {
@@ -211,6 +220,7 @@ export const postChangePassword = async (req, res) => {
 
   req.session.user.password = user.password;
 
+  req.flash("info", "password updated");
   return res.redirect("/users/logout");
 };
 
