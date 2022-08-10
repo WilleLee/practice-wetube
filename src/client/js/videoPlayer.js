@@ -110,21 +110,17 @@ const handleFullScreenBtn = (e) => {
   if (fullscreen) {
     document.exitFullscreen();
     fullScreenIcon.classList = "fa-solid fa-expand";
-    video.classList = "video__small-mode";
   } else {
     videoContainer.requestFullscreen();
     fullScreenIcon.classList = "fa-solid fa-compress";
-    video.classList = "video__large-mode";
   }
 };
 const handleFullScreenChanage = () => {
   const fullscreen = document.fullscreenElement;
   if (fullscreen) {
     fullScreenIcon.classList = "fa-solid fa-compress";
-    video.classList = "video__large-mode";
   } else {
     fullScreenIcon.classList = "fa-solid fa-expand";
-    video.classList = "video__small-mode";
   }
 };
 
