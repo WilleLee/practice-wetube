@@ -141,10 +141,19 @@ export const deleteComment = async (req, res) => {
   const {
     params: { id },
   } = req;
+  const {
+    user: { _id },
+  } = req.session;
+  const comment = await Comment.findById(id);
+  if (String(comment.owner) !== String(_id)) {
+    req.flash("error", "you can't remove comments that are not yours");
+    return res.sendStatus(404);
+  }
   try {
     await Comment.findByIdAndDelete(id);
     return res.sendStatus(200);
   } catch (err) {
+    req.flash("error", err._message);
     return res.sendStatus(404);
   }
 };
