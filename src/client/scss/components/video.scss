@@ -1,10 +1,19 @@
 // video mixin
 .video-mixin {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   .video-mixin__thumb {
     width: 100%;
-    height: 140px;
+    height: 77%;
     border-radius: 7px;
     background-color: ivory;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
   .video-mixin__data {
     padding: 0 15px;

@@ -4,9 +4,37 @@
 }
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, 220px);
+  grid-auto-rows: 200px;
   gap: 30px;
+  justify-content: center;
+  align-items: center;
 }
+@media screen and (max-width: 1024px) {
+  .video-grid {
+    grid-template-columns: repeat(3, 230px);
+    grid-auto-rows: 210px;
+  }
+}
+@media screen and (max-width: 820px) {
+  .video-grid {
+    grid-template-columns: repeat(3, 200px);
+    grid-auto-rows: 190px;
+  }
+}
+@media screen and (max-width: 740px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 220px);
+    grid-auto-rows: 200px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .video-grid {
+    grid-template-columns: repeat(1, 320px);
+    grid-auto-rows: 240px;
+  }
+}
+
 .auth-switch {
   text-align: center;
   a {
