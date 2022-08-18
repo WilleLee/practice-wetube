@@ -15,12 +15,12 @@ header
           a(href="/videos/upload") Upload Video
         li 
           a(href=`/users/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl === ""
-              span 🥺
-            else if loggedInUser.socialOnly
+            if loggedInUser.socialOnly && loggedInUser.avatarUrl
               img(src=loggedInUser.avatarUrl).header__avatar
-            else if !loggedInUser.socialOnly
+            else if !loggedInUser.socialOnly && loggedInUser.avatarUrl
               img(src="/"+loggedInUser.avatarUrl).header__avatar
+            else 
+              span 🥺
       else
         li 
           a(href="/login") Login    
