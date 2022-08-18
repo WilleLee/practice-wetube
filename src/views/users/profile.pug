@@ -3,10 +3,8 @@ include ../mixins/video
 
 block content 
   div.profile-data 
-    if user.socialOnly && user.avatarUrl
-      img(src=user.avatarUrl).avatar
-    else if !user.socialOnly && user.avatarUrl
-      img(src="/"+user.avatarUrl).avatar
+    if user.avatarUrl
+      img(src=user.avatarUrl crossorigin).avatar
     h3=user.username
   div.video-grid
     each video in user.videos

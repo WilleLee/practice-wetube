@@ -4,6 +4,7 @@ import session from "express-session";
 import { localsMiddleware } from "./middlewares";
 import MongoStore from "connect-mongo";
 import flash from "express-flash";
+import cors from "cors";
 /*routers*/
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
@@ -19,11 +20,14 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use((req, res, next) => {
   res.header("Cross-Origin-Embedder-Policy", "require-corp");
   res.header("Cross-Origin-Opener-Policy", "same-origin");
   next();
 });
+
+app.use(cors());
 
 app.use(
   session({
